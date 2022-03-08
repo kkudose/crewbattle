@@ -14,7 +14,7 @@
 	} from 'carbon-components-svelte'
 	import UserFollow16 from 'carbon-icons-svelte/lib/UserFollow16'
 	import Locked16 from 'carbon-icons-svelte/lib/Locked16'
-	import DragDrop from './DragDrop.svelte'
+	import DragDrop from '../shared/DragDrop.svelte'
 	import Hr from './Hr.svelte'
 
 	interface Player {
@@ -77,14 +77,14 @@
 </script>
 
 <svelte:head>
-	<title>a crew battle</title>
+	<title>crew battle</title>
 </svelte:head>
 
 <Grid>
 	<Hr />
 	<Row>
 		<Column>
-			<h1>a crew battle</h1>
+			<h1>crew battle</h1>
 		</Column>
 	</Row>
 	<Hr />

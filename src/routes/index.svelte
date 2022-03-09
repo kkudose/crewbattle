@@ -3,7 +3,6 @@
 	import 'carbon-components-svelte/css/g100.css'
 	import {
 		Button,
-		ButtonSet,
 		Column,
 		CopyButton,
 		Grid,
@@ -14,15 +13,17 @@
 	} from 'carbon-components-svelte'
 	import UserFollow16 from 'carbon-icons-svelte/lib/UserFollow16'
 	import Locked16 from 'carbon-icons-svelte/lib/Locked16'
+
 	import DragDrop from '../shared/DragDrop.svelte'
-	import Hr from './Hr.svelte'
+	import Hr from '../shared/Hr.svelte'
 
 	interface Player {
 		id: number
 		name: string
 	}
 
-	let isRandom = true
+	let numRandomize = 0
+	let randomizeText = 'randomize'
 	let numGroups = 2
 	let numPlayers = 0
 	let groups: Player[][] = [...Array(numGroups)].map(() => [])
@@ -42,7 +43,6 @@
 
 		// re-render
 		groups = groups
-		console.log(groups)
 	}
 
 	const handleAddPlayerEnter = (e: KeyboardEvent) => {
@@ -61,6 +61,16 @@
 		}
 	}
 
+	const randomizeTexts = [
+		'randomize',
+		'more random',
+		'rig crews',
+		'really rig crews',
+		'truly RNG',
+		'just one more click',
+		'crew battles postponed until clicking ends',
+		'you might have a problem'
+	]
 	const handleRandomize = () => {
 		const newGroups = [...Array(numGroups)].map(() => [])
 
@@ -72,7 +82,8 @@
 		}
 
 		groups = newGroups
-		isRandom = false
+		numRandomize = numRandomize === randomizeTexts.length - 1 ? 0 : numRandomize + 1
+		randomizeText = randomizeTexts[numRandomize]
 	}
 </script>
 
@@ -106,9 +117,9 @@
 		</Column>
 		<Column
 			><Slider
+				labelText="how many crews?"
 				max={6}
 				min={2}
-				labelText="how many crews?"
 				on:change={handleNumGroupChange}
 				step={2}
 				value={numGroups}
@@ -129,18 +140,15 @@
 	<Hr />
 	<Row>
 		<Column>
-			<ButtonSet>
-				<Button on:click={handleRandomize} kind="danger" size="xl"
-					>{isRandom ? 'randomize' : '"randomize" (again)'}</Button
-				>
-				<Button on:click={handleRandomize} icon={Locked16} kind="tertiary" size="xl"
-					>lock in crews</Button
-				>
-			</ButtonSet>
+			<Button kind="tertiary" on:click={handleRandomize} size="xl">{randomizeText}</Button>
+			<Button icon={Locked16} kind="danger" on:click={handleRandomize} size="xl"
+				>lock in crews</Button
+			>
 		</Column>
+		<Column />
 	</Row>
 </Grid>
-<CopyButton text="Carbon svelte" feedback="Copied to clipboard" />
+<CopyButton feedback="Copied to clipboard" text="Carbon svelte" />
 
 <style>
 	:global(#addPlayerBtn) {

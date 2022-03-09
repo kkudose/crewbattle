@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { blur, slide } from 'svelte/transition'
 	import _ from 'lodash'
 	import 'carbon-components-svelte/css/g100.css'
 	import { Button, ButtonSet, Column, Grid, Row, Tile } from 'carbon-components-svelte'
@@ -58,15 +59,16 @@
 	<Row>
 		<Column>
 			<h1>spyparty wildcards</h1>
+			rules by mintyrug
 		</Column>
 	</Row>
 	<Hr />
 	<Row>
 		<Column>
-			<h2>crew zero</h2>
+			<h2>crew {_.sample(['one', 'uno', 'un', 'ein', '1'])}</h2>
 		</Column>
 		<Column>
-			<h2>crew one</h2>
+			<h2>crew {_.sample(['two', 'dos', 'due', 'zwei', 'deux', '2'])}</h2>
 		</Column>
 	</Row>
 	<Hr />
@@ -92,50 +94,54 @@
 	<Row>
 		<Column>
 			{#each rulesByCrew[0] as r}
-				<div class="icons">
-					<Button
-						on:click={(_e) => handleCopy(`${r.name}: ${r.description}`)}
-						kind="secondary"
-						icon={Copy16}
-						iconDescription="copy rule to clipboard"
-					/>
-					<Button
-						on:click={(_e) => handleRemoveRule(0, r.name)}
-						kind="danger"
-						icon={TrashCan16}
-						iconDescription="remove rule"
-					/>
-				</div>
-				<Tile>
-					<h3>{r.name}</h3>
+				<div in:slide out:blur>
+					<div class="icons">
+						<Button
+							on:click={(_e) => handleCopy(`${r.name}: ${r.description}`)}
+							kind="secondary"
+							icon={Copy16}
+							iconDescription="copy rule to clipboard"
+						/>
+						<Button
+							on:click={(_e) => handleRemoveRule(0, r.name)}
+							kind="danger"
+							icon={TrashCan16}
+							iconDescription="remove rule"
+						/>
+					</div>
+					<Tile>
+						<h3>{r.name}</h3>
+						<Hr />
+						{r.description}
+					</Tile>
 					<Hr />
-					{r.description}
-				</Tile>
-				<Hr />
+				</div>
 			{/each}
 		</Column>
 		<Column>
 			{#each rulesByCrew[1] as r}
-				<div class="icons">
-					<Button
-						on:click={(_e) => handleCopy(`${r.name}: ${r.description}`)}
-						kind="secondary"
-						icon={Copy16}
-						iconDescription="copy rule to clipboard"
-					/>
-					<Button
-						on:click={(_e) => handleRemoveRule(1, r.name)}
-						kind="danger"
-						icon={TrashCan16}
-						iconDescription="remove rule"
-					/>
-				</div>
-				<Tile>
-					<h3>{r.name}</h3>
+				<div in:slide out:blur>
+					<div class="icons">
+						<Button
+							on:click={(_e) => handleCopy(`${r.name}: ${r.description}`)}
+							kind="secondary"
+							icon={Copy16}
+							iconDescription="copy rule"
+						/>
+						<Button
+							on:click={(_e) => handleRemoveRule(1, r.name)}
+							kind="danger"
+							icon={TrashCan16}
+							iconDescription="remove rule"
+						/>
+					</div>
+					<Tile>
+						<h3>{r.name}</h3>
+						<Hr />
+						{r.description}
+					</Tile>
 					<Hr />
-					{r.description}
-				</Tile>
-				<Hr />
+				</div>
 			{/each}
 		</Column>
 	</Row>

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { blur, slide } from 'svelte/transition'
+	import { slide } from 'svelte/transition'
+	import { flip } from 'svelte/animate'
 	import _ from 'lodash'
 	import 'carbon-components-svelte/css/g100.css'
 	import { Button, ButtonSet, Column, Grid, Row, Tile } from 'carbon-components-svelte'
@@ -32,16 +33,19 @@
 		rulesByCrew = rulesByCrew
 	}
 
-	const handleRemoveRule = (crewId: number, ruleName: string) => {
-		rulesByCrew[crewId] = rulesByCrew[crewId].filter((r) => r.name !== ruleName)
+	const handleRemoveRule = (crewId: number, ruleId: number) => {
+		rulesByCrew[crewId] = rulesByCrew[crewId].filter((r) => r.id !== ruleId)
 		rulesByCrew = rulesByCrew
 
-		// re-add rule to queue of possible rules (ignoring general rule)
-		let rule: Rule
-		if ((rule = sniperRules.find((r) => r.name === ruleName))) {
-			possibleRulesByCrew[crewId].sniper.push(rule)
-		} else if ((rule = spyRules.find((r) => r.name === ruleName))) {
+		// re-add rule to queue of possible rules
+		if (ruleId >= 1000) {
+			// ignore general rule
+		} else if (ruleId >= 500) {
+			const rule = spyRules.find((r) => r.id === ruleId)
 			possibleRulesByCrew[crewId].spy.push(rule)
+		} else {
+			const rule = sniperRules.find((r) => r.id === ruleId)
+			possibleRulesByCrew[crewId].sniper.push(rule)
 		}
 	}
 
@@ -93,8 +97,8 @@
 	<Hr />
 	<Row>
 		<Column>
-			{#each rulesByCrew[0] as r}
-				<div in:slide out:blur>
+			{#each rulesByCrew[0] as r (r.id)}
+				<div animate:flip={{ duration: 800 }} in:slide>
 					<div class="icons">
 						<Button
 							on:click={(_e) => handleCopy(`${r.name}: ${r.description}`)}
@@ -103,7 +107,7 @@
 							iconDescription="copy rule to clipboard"
 						/>
 						<Button
-							on:click={(_e) => handleRemoveRule(0, r.name)}
+							on:click={(_e) => handleRemoveRule(0, r.id)}
 							kind="danger"
 							icon={TrashCan16}
 							iconDescription="remove rule"
@@ -119,8 +123,8 @@
 			{/each}
 		</Column>
 		<Column>
-			{#each rulesByCrew[1] as r}
-				<div in:slide out:blur>
+			{#each rulesByCrew[1] as r (r.id)}
+				<div animate:flip={{ duration: 800 }} in:slide>
 					<div class="icons">
 						<Button
 							on:click={(_e) => handleCopy(`${r.name}: ${r.description}`)}
@@ -129,7 +133,7 @@
 							iconDescription="copy rule"
 						/>
 						<Button
-							on:click={(_e) => handleRemoveRule(1, r.name)}
+							on:click={(_e) => handleRemoveRule(1, r.id)}
 							kind="danger"
 							icon={TrashCan16}
 							iconDescription="remove rule"

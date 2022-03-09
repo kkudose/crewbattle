@@ -3,13 +3,13 @@
 	import { flip } from 'svelte/animate'
 	import _ from 'lodash'
 	import 'carbon-components-svelte/css/g100.css'
-	import { Button, ButtonSet, Column, Grid, Row, Tile } from 'carbon-components-svelte'
-	import Add16 from 'carbon-icons-svelte/lib/Add16'
-	import Copy16 from 'carbon-icons-svelte/lib/Copy16'
-	import TrashCan16 from 'carbon-icons-svelte/lib/TrashCan16'
+	import { Column, Grid, Row } from 'carbon-components-svelte'
 
 	import Hr from '../../shared/Hr.svelte'
 	import { sniperRules, spyRules, generalRules, Rule } from './rules'
+	import RuleTile from './RuleTile.svelte'
+	import RuleActionIcons from './RuleActionIcons.svelte'
+	import AddRuleButtonSet from './AddRuleButtonSet.svelte'
 
 	let rulesByCrew: Rule[][] = [[], []]
 	let possibleRulesByCrew = [
@@ -48,10 +48,6 @@
 			possibleRulesByCrew[crewId].sniper.push(rule)
 		}
 	}
-
-	const handleCopy = (textToCopy: string) => {
-		navigator.clipboard.writeText(textToCopy)
-	}
 </script>
 
 <svelte:head>
@@ -78,20 +74,10 @@
 	<Hr />
 	<Row>
 		<Column>
-			<ButtonSet>
-				<Button kind="danger" on:click={(_e) => handleAddRule(0, true)} icon={Add16}
-					>add sniper rule</Button
-				>
-				<Button kind="danger" on:click={(_e) => handleAddRule(0, false)} icon={Add16}
-					>add spy rule</Button
-				>
-			</ButtonSet>
+			<AddRuleButtonSet crewId={0} {handleAddRule} />
 		</Column>
 		<Column>
-			<ButtonSet>
-				<Button on:click={(_e) => handleAddRule(1, true)} icon={Add16}>add sniper rule</Button>
-				<Button on:click={(_e) => handleAddRule(1, false)} icon={Add16}>add spy rule</Button>
-			</ButtonSet>
+			<AddRuleButtonSet crewId={1} {handleAddRule} />
 		</Column>
 	</Row>
 	<Hr />
@@ -99,25 +85,8 @@
 		<Column>
 			{#each rulesByCrew[0] as r (r.id)}
 				<div animate:flip={{ duration: 800 }} in:slide>
-					<div class="icons">
-						<Button
-							on:click={(_e) => handleCopy(`${r.name}: ${r.description}`)}
-							kind="secondary"
-							icon={Copy16}
-							iconDescription="copy rule to clipboard"
-						/>
-						<Button
-							on:click={(_e) => handleRemoveRule(0, r.id)}
-							kind="danger"
-							icon={TrashCan16}
-							iconDescription="remove rule"
-						/>
-					</div>
-					<Tile>
-						<h3>{r.name}</h3>
-						<Hr />
-						{r.description}
-					</Tile>
+					<RuleActionIcons rule={r} crewId={0} {handleRemoveRule} />
+					<RuleTile rule={r} />
 					<Hr />
 				</div>
 			{/each}
@@ -125,25 +94,8 @@
 		<Column>
 			{#each rulesByCrew[1] as r (r.id)}
 				<div animate:flip={{ duration: 800 }} in:slide>
-					<div class="icons">
-						<Button
-							on:click={(_e) => handleCopy(`${r.name}: ${r.description}`)}
-							kind="secondary"
-							icon={Copy16}
-							iconDescription="copy rule"
-						/>
-						<Button
-							on:click={(_e) => handleRemoveRule(1, r.id)}
-							kind="danger"
-							icon={TrashCan16}
-							iconDescription="remove rule"
-						/>
-					</div>
-					<Tile>
-						<h3>{r.name}</h3>
-						<Hr />
-						{r.description}
-					</Tile>
+					<RuleActionIcons rule={r} crewId={1} {handleRemoveRule} />
+					<RuleTile rule={r} />
 					<Hr />
 				</div>
 			{/each}
@@ -152,9 +104,4 @@
 </Grid>
 
 <style>
-	.icons {
-		display: flex;
-		justify-content: flex-end;
-		margin-bottom: -24px;
-	}
 </style>

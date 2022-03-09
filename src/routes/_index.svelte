@@ -31,6 +31,7 @@
 	let isPlayerNameInvalid = false
 
 	const handleAddPlayer = () => {
+		// anything besides an empty name is ok
 		isPlayerNameInvalid = Boolean(!playerName)
 		if (isPlayerNameInvalid) {
 			return
@@ -115,16 +116,16 @@
 		<Column>
 			<Button id="addPlayerBtn" on:click={handleAddPlayer} icon={UserFollow16}>add player</Button>
 		</Column>
-		<Column
-			><Slider
+		<Column>
+			<Slider
 				labelText="how many crews?"
 				max={6}
 				min={2}
 				on:change={handleNumGroupChange}
 				step={2}
 				value={numGroups}
-			/></Column
-		>
+			/>
+		</Column>
 	</Row>
 	<Hr />
 	<Row>

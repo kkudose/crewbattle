@@ -55,9 +55,9 @@ export const sniperRules: Rule[] = [
     },
     {
         id: 8,
-        name: 'You Spin Me Right Round, Baby! (CY only)',
+        name: 'You Spin Me Right Round, Baby!',
         description:
-            'Venue must be changed to Courtyard. Sniper has to hold A or D continually for the entire round, and is only allowed to stop to shoot a guest.'
+            'Venue must be changed to Courtyard. Sniper has to hold A or D continually for the entire round, and is only allowed to stop to shoot a guest. Only lasts a single round.'
     }
 ]
 
@@ -88,7 +88,7 @@ export const spyRules: Rule[] = [
         id: 504,
         name: 'Will the Real DA Please Stand Up?',
         description:
-            'Spy must announce the real Double Agent before the game. Only lasts one round. * IF ON TERRACE: Sniper may elect to play on another venue.'
+            'Spy must announce the real Double Agent before the game. Only lasts a single round. * IF ON TERRACE: Sniper may elect to play on another venue.'
     },
     {
         id: 505,
@@ -117,7 +117,7 @@ export const spyRules: Rule[] = [
         id: 509,
         name: 'Sober',
         description:
-            'Spy must reject all drinks offered by Toby during the game. Green purloins are considered valid, but if Spy hits a White test, the Wildcard is considered breached.'
+            'Spy must reject all drinks offered by Toby during the game. Green purloins are considered valid, but if Spy hits a White test, the Wildcard is considered breached. Only lasts a single round.'
     }
 ]
 

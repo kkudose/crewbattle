@@ -1,38 +1,22 @@
-# create-svelte
+# Crew Battle
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+ An easy way to organize a crew battle, i.e. team-based tournament with a shared pool of life/stock. I think it originated from the [Super Smash Bros.](https://www.ssbwiki.com/Crew_battle) scene, but I was introduced to the concept from a tiny indie game, [SpyParty](http://www.spyparty.com/).
 
-## Creating a project
+There's another helper tool at [/wildcards](https://crewbattle.pages.dev/wildcards) that's specific to SpyParty.
 
-If you're seeing this, you've probably already done this step. Congrats!
+-----
 
-```bash
-# create a new project in the current directory
-npm init svelte@next
+## But actually:
 
-# create a new project in my-app
-npm init svelte@next my-app
+I enjoyed using [Svelte](https://svelte.dev/), [SvelteKit](https://kit.svelte.dev/), and [Cloudflare Pages](https://pages.cloudflare.com/) with [my other project](https://github.com/kkudose/hades), so 
+I wanted to continue exploring. This time, I added [Carbon Components Svelte](https://github.com/carbon-design-system/carbon-components-svelte) instead of writing completely custom CSS.
+
+To run locally, install dependencies:
+```
+npm install
 ```
 
-> Note: the `@next` is temporary
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
+Then run:
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
-
-## Building
-
-Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
-
-```bash
-npm run build
-```
-
-> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.

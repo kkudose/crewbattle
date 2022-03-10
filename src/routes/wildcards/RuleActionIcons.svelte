@@ -6,7 +6,7 @@
 
 	export let rule: Rule
 	export let crewId: number
-	export let handleRemoveRule: Function
+	export let handleRemoveRule: (crewId: number, rulewId: number) => void
 
 	const handleCopy = (textToCopy: string) => {
 		navigator.clipboard.writeText(textToCopy)

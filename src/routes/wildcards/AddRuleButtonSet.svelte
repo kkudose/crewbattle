@@ -2,7 +2,7 @@
 	import { Button, ButtonSet } from 'carbon-components-svelte'
 	import Add16 from 'carbon-icons-svelte/lib/Add16'
 
-	export let handleAddRule: Function
+	export let handleAddRule: (crewId: number, isSniper: boolean) => void
 	export let crewId: number
 
 	const buttonKind = crewId ? 'primary' : 'danger'

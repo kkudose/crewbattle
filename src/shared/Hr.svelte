@@ -2,19 +2,31 @@
 	svelte carbon components don't implement layout for some strange reason
 	simpler to add spacing with this than override the theming
 -->
-<script>
+<script lang="ts">
+	type Size = 'sm' | 'md' | 'lg'
+
 	export let isVisible = false
+	export let size: Size = 'md'
+
+	const styles = `${!isVisible && 'no-border'} ${size}`
 </script>
 
-<hr class={isVisible ? 'spacer' : 'invisibleSpacer'} />
+<hr class={styles} />
 
 <style>
-	.spacer,
-	.invisibleSpacer {
+	.sm {
+		margin: 24px;
+	}
+
+	.md {
 		margin: 32px;
 	}
 
-	.invisibleSpacer {
+	.lg {
+		margin: 48px;
+	}
+
+	.no-border {
 		border: 0;
 	}
 </style>

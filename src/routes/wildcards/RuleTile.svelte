@@ -12,15 +12,16 @@
 	<h3>
 		{rule.name}
 		{#if rule.description.includes('Only lasts a single round')}
-			<Tag class="tags">temporary <Timer16 class="timer" /></Tag>
+			<Tag class="tag" type="purple">temporary <Timer16 class="timer" /></Tag>
 		{/if}
 	</h3>
-	<Hr />
-	{rule.description}
+	<Hr size="sm" />
+	<p>{rule.description}</p>
 </Tile>
 
 <style>
-	:global(.tags) {
+	:global(.tag) {
+		border-radius: 0;
 		margin-left: 16px;
 		vertical-align: text-bottom;
 	}

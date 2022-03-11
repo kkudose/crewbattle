@@ -15,14 +15,16 @@
 
 <div class="icons">
 	<Button
+		class="btn"
 		on:click={(_e) => handleCopy(`${rule.name}: ${rule.description}`)}
-		kind="secondary"
+		kind="tertiary"
 		icon={Copy16}
 		iconDescription="copy rule"
 	/>
 	<Button
+		class="btn"
 		on:click={(_e) => handleRemoveRule(crewId, rule.id)}
-		kind="danger"
+		kind="danger-tertiary"
 		icon={TrashCan16}
 		iconDescription="remove rule"
 	/>
@@ -33,5 +35,9 @@
 		display: flex;
 		justify-content: flex-end;
 		margin-bottom: -24px;
+	}
+
+	:global(.btn) {
+		background-color: #262626;
 	}
 </style>

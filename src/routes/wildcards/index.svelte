@@ -71,7 +71,7 @@
 			<h2>crew {_.sample(['two', 'dos', 'due', 'zwei', 'deux', '2'])}</h2>
 		</Column>
 	</Row>
-	<Hr />
+	<Hr size="sm" />
 	<Row>
 		<Column>
 			<AddRuleButtonSet crewId={0} {handleAddRule} />

@@ -10,6 +10,7 @@
 	import RuleTile from './RuleTile.svelte'
 	import RuleActionIcons from './RuleActionIcons.svelte'
 	import AddRuleButtonSet from './AddRuleButtonSet.svelte'
+	import type { Role } from './Role'
 
 	let rulesByCrew: Rule[][] = [[], []]
 	let possibleRulesByCrew = [
@@ -23,10 +24,10 @@
 		}
 	]
 
-	const handleAddRule = (crewId: number, isSniper: boolean) => {
-		let rules = possibleRulesByCrew[crewId][isSniper ? 'sniper' : 'spy']
+	const handleAddRule = (crewId: number, role: Role) => {
+		let rules = possibleRulesByCrew[crewId][role]
 		if (rules.length === 0) {
-			rules = _.shuffle((isSniper ? sniperRules : spyRules).concat(generalRules))
+			rules = _.shuffle((role === 'sniper' ? sniperRules : spyRules).concat(generalRules))
 		}
 
 		rulesByCrew[crewId].push(rules.pop())
@@ -37,7 +38,7 @@
 		rulesByCrew[crewId] = rulesByCrew[crewId].filter((r) => r.id !== ruleId)
 		rulesByCrew = rulesByCrew
 
-		// re-add rule to queue of possible rules
+		// re-add rule to end of queue of possible rules
 		if (ruleId >= 1000) {
 			// ignore general rule
 		} else if (ruleId >= 500) {
@@ -58,8 +59,8 @@
 	<Hr />
 	<Row>
 		<Column>
-			<h1>spyparty wildcards</h1>
-			rules by mintyrug
+			<h1>spyparty <span>wildcards</span></h1>
+			<p>rules by mintyrug</p>
 		</Column>
 	</Row>
 	<Hr />
@@ -104,4 +105,20 @@
 </Grid>
 
 <style>
+	span {
+		background: linear-gradient(
+			45deg,
+			#5461c8 12.5%,
+			#c724b1 0 25%,
+			#e4002b 0 37.5%,
+			#ff6900 0 50%,
+			#f6be00 0 62.5%,
+			#97d700 0 75%,
+			#00ab84 0 87.5%,
+			#00a3e0 0
+		);
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
 </style>

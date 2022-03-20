@@ -258,7 +258,7 @@
 	}
 
 	:global(.no-grow) {
-		flex-grow: 0;
+		flex-grow: 0 !important;
 	}
 
 	:global(.flex-row) {

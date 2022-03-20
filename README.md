@@ -18,14 +18,14 @@ There's another helper tool at [/wildcards](https://crewbattle.pages.dev/wildcar
 ## But actually:
 
 I enjoyed using [Svelte](https://svelte.dev/), [SvelteKit](https://kit.svelte.dev/), and [Cloudflare Pages](https://pages.cloudflare.com/) with [my other project](https://github.com/kkudose/hades), so 
-I wanted to continue exploring these. This time, I added [Carbon Components Svelte](https://github.com/carbon-design-system/carbon-components-svelte) instead of writing completely custom CSS. I also used [Svelte stores](https://svelte.dev/docs#run-time-svelte-store) instead of relying on locally declared bindings.
+I wanted to continue exploring these. This time, I added [Carbon Components Svelte](https://github.com/carbon-design-system/carbon-components-svelte) instead of writing completely custom CSS. I also used [Svelte stores](https://svelte.dev/docs#run-time-svelte-store) instead of relying on locally declared bindings, and [pnpm] instead of npm.
 
 To run locally, install dependencies:
 ```
-npm install
+pnpm i
 ```
 
 Then run:
 ```bash
-npm run dev
+pnpm dev
 ```

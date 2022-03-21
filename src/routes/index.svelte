@@ -257,17 +257,13 @@
 		margin: 0 8px;
 	}
 
-	:global(.no-grow) {
+	:global(.no-grow, .slider) {
 		flex-grow: 0 !important;
 	}
 
 	:global(.flex-row) {
 		display: flex;
 		justify-content: normal;
-	}
-
-	:global(.slider) {
-		flex-grow: 0;
 	}
 
 	:global(.tooltip-icon) {
